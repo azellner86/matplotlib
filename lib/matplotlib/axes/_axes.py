@@ -296,8 +296,13 @@ class Axes(_AxesBase):
         --------
         .. plot:: gallery/text_labels_and_annotations/legend.py
         """
+
+        axes = [self]
+        if self._twinx_ax:
+            axes.append(self._twinx_ax)
+
         handles, labels, extra_args, kwargs = mlegend._parse_legend_args(
-                [self],
+                axes,
                 *args,
                 **kwargs)
         if len(extra_args):
