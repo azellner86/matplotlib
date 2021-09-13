@@ -298,8 +298,17 @@ class Axes(_AxesBase):
         """
 
         axes = [self]
+
         if self._twinx_ax:
-            axes.append(self._twinx_ax)
+            if self == self.figure.axes[0]:
+                axes.extend(self._twinx_ax)
+
+            elif self not in self._twinx_ax:
+                axes = [self]
+
+            else:
+                axes = [self.figure.axes[0]]
+                axes.extend(self._twinx_ax)
 
         handles, labels, extra_args, kwargs = mlegend._parse_legend_args(
                 axes,

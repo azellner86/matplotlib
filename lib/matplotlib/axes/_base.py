@@ -545,7 +545,7 @@ class _AxesBase(martist.Artist):
     _axis_names = ("x", "y")  # See _get_axis_map.
     _shared_axes = {name: cbook.Grouper() for name in _axis_names}
     _twinned_axes = cbook.Grouper()
-    _twinx_ax = None
+    _twinx_ax = []
 
     def __str__(self):
         return "{0}({1[0]:g},{1[1]:g};{1[2]:g}x{1[3]:g})".format(
@@ -4675,7 +4675,7 @@ class _AxesBase(martist.Artist):
         ax2.patch.set_visible(False)
 
         if share_legend:
-            self._twinx_ax = ax2
+            self._twinx_ax.append(ax2)
 
         return ax2
 
